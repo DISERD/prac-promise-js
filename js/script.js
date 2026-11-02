@@ -1,5 +1,5 @@
-const isSuccess = true;
-/*
+/*const isSuccess = true;
+
 const isSuccess = true;
 
 const myPromise = new Promise((resolve, reject) => {
@@ -9,7 +9,19 @@ const myPromise = new Promise((resolve, reject) => {
     } else {
       reject("error - 404");
     }
-  }, 2000);
+  }, 7000);
+});
+
+const promise = new Promise((resolve, reject) => {
+  const isSuccess = true; // спекла
+
+  setTimeout(() => {
+    if (isSuccess) {
+      resolve("cake");
+    } else {
+      reject("no");
+    }
+  }, 7000);
 });
 
 myPromise
@@ -25,12 +37,11 @@ myPromise
     console.log(result);
   })
   .catch((error) => {
-    console.log(error);
+    console.log(error); // buy in the shop
   })
   .finally(() => {
-    console.log("delete spiner");
+    console.log("delete spiner"); // party
   });
-*/
 
 const randomPromise = () => {
   return new Promise((resolve, reject) => {
@@ -168,3 +179,68 @@ function addTwoNumbers(a, b) {
 addTwoNumbers(5, 10)
   .then((result) => console.log(result))
   .catch((error) => console.log(error));
+
+*/
+
+/**
+Випадковий проміс
+Створіть функцію randomPromise, яка повертає проміс,
+який випадковим чином виконується або відхиляється.
+Використайте метод then, щоб обробити виконання проміса та
+вивести повідомлення "Проміс виконано".
+Використайте метод catch, щоб обробити помилку, якщо
+проміс відхиляється, і вивести повідомлення "Помилка проміса".
+Використайте метод finally для виведення повідомлення
+"Робота з промісом завершена" незалежно від того, чи було виконання успішним, чи виникла помилка.
+
+const randomPromise = () => {
+  return new Promise((resolve, reject) => {
+    const isSuccess = Math.random() < 0.5;
+    if (isSuccess) {
+      resolve("Проміс виконано");
+    } else {
+      reject("Помилка проміса");
+    }
+  });
+};
+
+randomPromise()
+  .then(result => console.log(result))   // win
+  .catch(err => console.log(err))        // error
+  .finally(() => console.log("Робота з промісом завершена")); // whatever
+
+Послідовний проміс
+Створіть функцію getRandomNumber, яка повертає проміс,
+що генерує випадкове число.
+Використайте метод then, щоб обробити результат першого проміса,
+додати до нього число 10 та вивести результат.
+Використайте метод catch, щоб обробити помилки у будь-якому
+з промісів та вивести повідомлення "Помилка проміса".
+Використайте метод finally для виведення повідомлення
+"Робота з промісом завершена" незалежно від того, чи було виконання успішним, чи виникла помилка.
+
+const getRandomNumber = () => {
+  return new Promise((resolve, reject) => {
+    const number = Math.floor(Math.random() * 100); // random number between 0 and 99
+    
+    if (number >= 0) {
+      resolve(number);
+    } else {
+      reject("Помилка проміса");
+    }
+  });
+};
+
+getRandomNumber()
+  .then(num => {
+    const sum = num + 10;
+    console.log(`Результат: ${num}, після додавання 10: ${sum}`);
+    return sum;
+  })
+  .catch(err => console.log(err))
+  .finally(() => console.log("Робота з промісом завершена"));
+*/
+
+
+
+
